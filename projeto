@@ -63,7 +63,7 @@ void loop() {
     return;
   }
    if (temperatura > 27){
-        Serial.println("Entrou no if..... ");
+        Serial.println("Alerta temperatura acima de 27C.....  ");
         tone(pinoBuzzer, frequencia); // gera frequencia de 2000Hz no buzzer
         delay(1000);
         noTone(pinoBuzzer); // para frequencia no buzzer
