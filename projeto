@@ -4,6 +4,7 @@
 //Define do pino a ser utilizado no ESP para o sensor = GPIO4
 #define DHT_DATA_PIN 13
 #define DHTTYPE DHT11
+#define pinoBuzzer D8
  
 //Definir o SSID da rede WiFi
 const char* ssid = "Tiemi 2G"; //trocar pelo nome da sua rede
@@ -12,14 +13,15 @@ const char* password = "xxxxxxxxx"; //trocar pela senha da sua rede
  
 //Colocar a API Key para escrita neste campo
 //Ela é fornecida no canal que foi criado na aba API Keys
-String apiKey = "xxxxxxxxxxxxx";       //trocar pela API Write
+String apiKey = "xxxxxxxxxxxx";       //trocar pela API Write
 const char* server = "api.thingspeak.com";
  
 DHT dht(DHT_DATA_PIN, DHTTYPE);
 WiFiClient client;
 int ldr = 0; //Setando a utilizaçâo do LDR à porta ADC A0 do Nodemcu
 int valorldr = 0;//variável para armazenar a leitura do ldr.
- 
+int frequencia = 2000;
+
 void setup() {
   //Configuração da UART
   Serial.begin(9600);
@@ -33,6 +35,8 @@ void setup() {
   }
  
   dht.begin();
+
+  pinMode(pinoBuzzer, OUTPUT); // configura o pino com o buzzer como saída
  
   //Logs na porta serial
   Serial.println("");
@@ -58,7 +62,14 @@ void loop() {
     Serial.println("Erro ao ler o sensor!");
     return;
   }
-   
+   if (temperatura > 27){
+        Serial.println("Entrou no if..... ");
+        tone(pinoBuzzer, frequencia); // gera frequencia de 2000Hz no buzzer
+        delay(1000);
+        noTone(pinoBuzzer); // para frequencia no buzzer
+        delay(1000);
+    
+    }
   //Inicia um client TCP para o envio dos dados
   if (client.connect(server,80)) {
     String postStr = apiKey;
@@ -86,7 +97,7 @@ void loop() {
      Serial.print(" Umidade: ");
      Serial.print(umidade);
      Serial.print(" Luminosidade: ");
-     Serial.print(valorldr);
+     Serial.println(valorldr);
   }
   client.stop();
 }
