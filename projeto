@@ -8,7 +8,7 @@
 //Definir o SSID da rede WiFi
 const char* ssid = "Tiemi 2G"; //trocar pelo nome da sua rede
 //Definir a senha da rede WiFi
-const char* password = "991463663"; //trocar pela senha da sua rede
+const char* password = "xxxxxxxxx"; //trocar pela senha da sua rede
  
 //Colocar a API Key para escrita neste campo
 //Ela é fornecida no canal que foi criado na aba API Keys
