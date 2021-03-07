@@ -12,7 +12,7 @@ const char* password = "xxxxxxxxx"; //trocar pela senha da sua rede
  
 //Colocar a API Key para escrita neste campo
 //Ela é fornecida no canal que foi criado na aba API Keys
-String apiKey = "C79ELGDDN1IOXNXL";       //trocar pela API Write
+String apiKey = "xxxxxxxxxxxxx";       //trocar pela API Write
 const char* server = "api.thingspeak.com";
  
 DHT dht(DHT_DATA_PIN, DHTTYPE);
